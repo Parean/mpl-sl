@@ -604,3 +604,5 @@ inv: [
   m:;
   m adj m det /
 ] pfunc;
+
+fun: [];
