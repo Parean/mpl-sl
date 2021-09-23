@@ -334,4 +334,3 @@ hasSchemaName: [
   object: name:;;
   @object "SCHEMA_NAME" has [@object.@SCHEMA_NAME name =] &&
 ];
-
