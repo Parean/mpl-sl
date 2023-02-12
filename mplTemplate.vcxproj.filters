@@ -25,6 +25,9 @@
       <Filter>sl</Filter>
     </MPL>
     <MPL Include="test.mpl" />
+    <MPL Include="sl\Span.mpl">
+      <Filter>sl</Filter>
+    </MPL>
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="mpl.sl.natvis" />
