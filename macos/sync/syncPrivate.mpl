@@ -171,6 +171,7 @@ spawnFiber: [
 
   reusableFibers.empty? [
     creationData: {nativeFiber: Natx; func: @func; funcData: funcData;};
+    CreationData: creationData Ref virtual;
     fiberFunc: {arg1: Int32; arg2: Int32;} {} {convention: cdecl;} codeRef; [
       arg2: arg1:;;
       creationDataPtr: 0nx;
@@ -178,7 +179,7 @@ spawnFiber: [
       arg1 @creationDataPtr storageAddress                     Int32 addressToReference set
       arg2 @creationDataPtr storageAddress Int32 storageSize + Int32 addressToReference set
 
-      creationData: creationDataPtr creationData addressToReference;
+      creationData: creationDataPtr CreationData addressToReference;
       data: FiberData;
 
       creationData.nativeFiber new @data.!nativeFiber
