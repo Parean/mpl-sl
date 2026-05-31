@@ -36,8 +36,9 @@ dieCount:  Int32;
 
 # Test that spawn moves the input and finished context destroys it
 [
-  0 !initCount
-  0 !dieCount
+  # TODO: Remove [dynamic] after updating the compiler.
+  0 dynamic !initCount
+  0 dynamic !dieCount
   object: {
     INIT: [1 !state initCount 1 + @initCount set];
     DIE: [dieCount 1 + @dieCount set];
@@ -78,7 +79,7 @@ dieCount:  Int32;
   @context.valid? [ # Context is valid, otherwise skip the test
     context manuallyDestroyVariable
     context manuallyInitVariable
-    context.valid? ["Context.INIT did not invalidate context" raiseStaticError] [] uif
+    [context.valid? ~] "Context.INIT did not invalidate context" ensure
   ] when
 ] call
 
@@ -97,8 +98,9 @@ dieCount:  Int32;
 
 # Test that Context.DIE destroys output and reused context destroys it again
 [
-  0 !initCount
-  0 !dieCount
+  # TODO: Remove [dynamic] after updating the compiler.
+  0 dynamic !initCount
+  0 dynamic !dieCount
   Object: [{
     INIT: [initCount 1 + @initCount set];
     DIE: [dieCount 1 + @dieCount set];
