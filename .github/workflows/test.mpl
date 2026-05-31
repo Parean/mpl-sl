@@ -20,6 +20,7 @@ mplc: [MPLC TRUE] [MPLC] pfunc;
 additionalLibrary: [
   PLATFORM (
     "linux"   ["m"]
+    "macos"   ["m"]
     "windows" ["ws2_32.lib"]
     [
       "Unknown platform" raiseStaticError
@@ -30,6 +31,7 @@ additionalLibrary: [
 executableExtension: [
   PLATFORM (
     "linux"   [""]
+    "macos"   [""]
     "windows" [".exe"]
     [
       "Unknown platform" raiseStaticError

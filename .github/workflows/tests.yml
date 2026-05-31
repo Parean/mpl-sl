@@ -9,7 +9,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, ubuntu-latest]
+        include:
+        - os: windows-latest
+          platform: windows
+        - os: ubuntu-latest
+          platform: linux
+        - os: macos-15
+          platform: macos
 
     steps:
     - name: сheckout
@@ -21,15 +27,17 @@ jobs:
     - name: mplc
       shell: bash
       run: |
-        if [[ "${{ matrix.os }}" == 'windows-latest' ]]; then
+        if [[ "${{ matrix.platform }}" == 'windows' ]]; then
           curl -LSs -o tools/mplc.exe https://github.com/Matway/mpl-c/releases/latest/download/mplc.exe;
+        elif [[ "${{ matrix.platform }}" == 'macos' ]]; then
+          curl -LSfs -o tools/mplc https://cloud.gravilink.org/s/cgKoT8bLwkcQN9y/download/mplc && chmod +x tools/mplc;
         else
           curl -LSfs -o tools/mplc https://github.com/Matway/mpl-c/releases/latest/download/mplc && chmod +x tools/mplc;
         fi
 
     - name: test
       shell: bash
-      run: if [[ "${{ matrix.os }}" == 'windows-latest' ]]; then ./test.bat tools/mplc; else ./test.sh ./tools/mplc; fi
+      run: if [[ "${{ matrix.platform }}" == 'windows' ]]; then ./test.bat tools/mplc; else ./test.sh ./tools/mplc "${{ matrix.platform }}"; fi
 
     - name: artifacts
       uses: actions/upload-artifact@main
