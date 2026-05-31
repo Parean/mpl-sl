@@ -11,6 +11,7 @@
 "algorithm.="           use
 "control.&&"            use
 "control.Real32"        use
+"control.abs"           use
 "control.compilable?"   use
 "control.ensure"        use
 "control.print"         use
@@ -68,7 +69,12 @@ PoseTest: [];
     (1.0r32 2.0r32 3.0r32) (1.0  0.0  0.0  0.0 ) quaternion pose
     (2      3      4     ) (0n32 1n32 0n32 0n32) quaternion pose 1.0 interpolate;
   [pose0.position            (1.25r32            2.25r32            3.25r32    ) =] "[interpolate] produced a wrong [.position]"    ensure
-  [pose0.orientation.entries (0.9486832980505137 0.3162277660168379 0.0     0.0) =] "[interpolate] produced a wrong [.orientation]" ensure
+  [
+    0 pose0.orientation.entries @ 0.9486832980505137 - abs 1.0e-6 <
+    [1 pose0.orientation.entries @ 0.3162277660168379 - abs 1.0e-6 <] &&
+    [2 pose0.orientation.entries @ 0.0                - abs 1.0e-6 <] &&
+    [3 pose0.orientation.entries @ 0.0                - abs 1.0e-6 <] &&
+  ] "[interpolate] produced a wrong [.orientation]" ensure
   [pose1.position            (2.0r32             3.0r32             4.0r32     ) =] "[interpolate] produced a wrong [.position]"    ensure
   [pose1.orientation.entries (0.0                1.0                0.0     0.0) =] "[interpolate] produced a wrong [.orientation]" ensure
 ] call
