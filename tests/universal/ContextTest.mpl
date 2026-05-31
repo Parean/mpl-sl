@@ -49,9 +49,9 @@ dieCount:  Int32;
   };
 
   context: @object () spawn;
-  [initCount 1 = [dieCount 0 =] && [@object.state 1 =] &&] "spawn did not move the input" ensure
+  [initCount 1 dynamic = [dieCount 0 dynamic =] && [@object.state 1 dynamic =] &&] "spawn did not move the input" ensure
   @context.wait
-  [initCount 1 = [dieCount 1 =] && [@object.state 1 =] &&] "finished context did not destroy the copied input" ensure
+  [initCount 1 dynamic = [dieCount 1 dynamic =] && [@object.state 1 dynamic =] &&] "finished context did not destroy the copied input" ensure
 ] call
 
 # Test that yield executes the context body
