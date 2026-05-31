@@ -77,9 +77,9 @@ dieCount:  Int32;
 
   group: ContextGroup;
   @object @group.spawn
-  [initCount 1 dynamic = [dieCount 0 dynamic =] && [@object.state 1 dynamic =] &&] "ContextGroup.spawn did not move the input" ensure
+  [initCount 1 = [dieCount 0 =] && [@object.state 1 =] &&] "ContextGroup.spawn did not move the input" ensure
   @group.wait
-  [initCount 1 dynamic = [dieCount 1 dynamic =] && [@object.state 1 dynamic =] &&] "finished context did not destroy the copied input" ensure
+  [initCount 1 = [dieCount 1 =] && [@object.state 1 =] &&] "finished context did not destroy the copied input" ensure
 ] call
 
 # Test that ContextGroup.wait yields

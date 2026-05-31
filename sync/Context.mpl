@@ -70,7 +70,8 @@ Context: [{
         cancel
       ] [
         [currentFiber.@func @defaultCancelFunc is] "invalid cancelation function" assert
-        data.fiber storageAddress [FiberData addressToReference .cancel] @currentFiber.setFunc
+        Self: @self Ref virtual;
+        self storageAddress [@Self addressToReference .cancel] @currentFiber.setFunc
       ] if
 
       dispatch

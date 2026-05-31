@@ -86,8 +86,8 @@ ContextGroup: [{
       @currentFiber @fibers.@first.!waitedBy
       canceled? ~ [
         [currentFiber.@func @defaultCancelFunc is] "invalid cancelation function" assert
-        Fibers: Data IntrusiveDeque Ref virtual;
-        fibers storageAddress [@Fibers addressToReference [.@fiber.cancel] each] @currentFiber.setFunc
+        Self: @self Ref virtual;
+        self storageAddress [@Self addressToReference .cancel] @currentFiber.setFunc
       ] when
 
       dispatch
