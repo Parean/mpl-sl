@@ -63,14 +63,14 @@ PoseTest: [];
 [
   pose0:
     (1.0r32 2.0r32 3.0r32) (1.0  0.0  0.0  0.0 ) quaternion pose
-    (2      3      4     ) (0n32 1n32 0n32 0n32) quaternion pose 0.25r32 interpolate;
+    (2      3      4     ) (0.28 0.96 0.0  0.0 ) quaternion pose 0.5 interpolate;
   pose1:
     (1.0r32 2.0r32 3.0r32) (1.0  0.0  0.0  0.0 ) quaternion pose
-    (2      3      4     ) (0n32 1n32 0n32 0n32) quaternion pose 1.0 interpolate;
-  [pose0.position            (1.25r32            2.25r32            3.25r32    ) =] "[interpolate] produced a wrong [.position]"    ensure
-  [pose0.orientation.entries (0.9486832980505137 0.3162277660168379 0.0     0.0) =] "[interpolate] produced a wrong [.orientation]" ensure
-  [pose1.position            (2.0r32             3.0r32             4.0r32     ) =] "[interpolate] produced a wrong [.position]"    ensure
-  [pose1.orientation.entries (0.0                1.0                0.0     0.0) =] "[interpolate] produced a wrong [.orientation]" ensure
+    (2      3      4     ) (0.28 0.96 0.0  0.0 ) quaternion pose 1.0 interpolate;
+  [pose0.position            (1.5r32 2.5r32 3.5r32    ) =] "[interpolate] produced a wrong [.position]"    ensure
+  [pose0.orientation.entries (0.8    0.6    0.0    0.0) =] "[interpolate] produced a wrong [.orientation]" ensure
+  [pose1.position            (2.0r32 3.0r32 4.0r32    ) =] "[interpolate] produced a wrong [.position]"    ensure
+  [pose1.orientation.entries (0.28   0.96   0.0    0.0) =] "[interpolate] produced a wrong [.orientation]" ensure
 ] call
 
 [
