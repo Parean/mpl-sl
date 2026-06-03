@@ -143,7 +143,7 @@ TRUE dynamic {}                     "Cond"                    testFormatting
 0n64 dynamic {}                     "Nat64"                   testFormatting
 0n8  dynamic {}                     "Nat8"                    testFormatting
 0.0r32              {}              "0.0r32"                  testFormatting
--1000.0r32 3.0r32 / {}              "-333.3333333333333r32"   testFormatting
+-1000.0r32 4.0r32 / {}              "-250.0r32"                testFormatting
 0.0r32 dynamic      {}              "Real32"                  testFormatting
 0.0                 {}              "0.0"                     testFormatting
 -1000.0 3.0 /       {}              "-333.3333333333333"      testFormatting
