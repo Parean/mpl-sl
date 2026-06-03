@@ -82,7 +82,9 @@ fillUpSocketSendBuffer: [
 
 # Test that write does not block when read is canceled on the same fd
 [
-  _: client: 0x7F000001n32 6600n16 getServerAndClientContexts .get; .get;
+  serverContext: clientContext: 0x7F000001n32 6600n16 getServerAndClientContexts;;
+  _:      @serverContext.get;
+  client: @clientContext.get;
 
   readContext: {connection: @client; CALL: [
     result: String;
@@ -106,7 +108,9 @@ fillUpSocketSendBuffer: [
 
 # Test that read does not block when write is canceled on the same fd
 [
-  server: client: 0x7F000001n32 6600n16 getServerAndClientContexts .get; .get;
+  serverContext: clientContext: 0x7F000001n32 6600n16 getServerAndClientContexts;;
+  server: @serverContext.get;
+  client: @clientContext.get;
 
   readContext: {connection: @client; CALL: [
     result: String;
@@ -133,7 +137,9 @@ fillUpSocketSendBuffer: [
 
 # Test that on cancel before resuming nothing is read from the socket buffer; fails on Windows
 [
-  server: client: 0x7F000001n32 6600n16 getServerAndClientContexts .get; .get;
+  serverContext: clientContext: 0x7F000001n32 6600n16 getServerAndClientContexts;;
+  server: @serverContext.get;
+  client: @clientContext.get;
 
   readContext: {connection: @client; CALL: [
     result: String;
