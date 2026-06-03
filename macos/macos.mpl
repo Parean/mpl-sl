@@ -189,28 +189,28 @@ NOTE_CHILD:                         0x00000004n32;    # am a child process
 
 {} Int32 {convention: cdecl;} "kqueue" importFunction
 
-{
-  kq:           Int32;
-  changelist:   struct_kevent Cref;
-  nchanges:     Int32;
-  eventlist:    struct_kevent Ref;
-  nevents:      Int32;
-  timeout:      timespec Cref;
-} Int32 {convention: cdecl;} "kevent" importFunction
-
-# Mimic: int kevent64(int kq, const struct kevent64_s *changelist, int nchanges, struct kevent64_s *eventlist, int nevents, unsigned int flags, const struct timespec *timeout);
-{
-  kq:           Int32;
-  changelist:   struct_kevent64_s Cref;
-  nchanges:     Int32;
-  eventlist:    struct_kevent64_s Ref;
-  nevents:      Int32;
-  flags:        Nat32;
-  timeout:      timespec Cref;
-} Int32 {convention: cdecl;} "kevent64" importFunction
-
 Natx storageSize 8nx = [ # __x86_64__
+  # Mimic: int kevent64(int kq, const struct kevent64_s *changelist, int nchanges, struct kevent64_s *eventlist, int nevents, unsigned int flags, const struct timespec *timeout);
+  {
+    kq:           Int32;
+    changelist:   struct_kevent64_s Cref;
+    nchanges:     Int32;
+    eventlist:    struct_kevent64_s Ref;
+    nevents:      Int32;
+    flags:        Nat32;
+    timeout:      timespec Cref;
+  } Int32 {convention: cdecl;} "kevent64" importFunction
+
   struct_kevent: @struct_kevent64_s;
   EV_SET: @EV_SET64;
   kevent: @kevent64;
-] [] uif
+] [
+  {
+    kq:           Int32;
+    changelist:   struct_kevent Cref;
+    nchanges:     Int32;
+    eventlist:    struct_kevent Ref;
+    nevents:      Int32;
+    timeout:      timespec Cref;
+  } Int32 {convention: cdecl;} "kevent" importFunction
+] uif
