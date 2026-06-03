@@ -61,14 +61,6 @@ XMLDocument: [{
 XMLVALUE_ELEMENT:  [0];
 XMLVALUE_CHARDATA: [1];
 
-{dst: 0nx;          } () {} "XMLElementDestroy" importFunction
-{dst: 0nx; src: 0nx;} () {} "XMLElementSet"     importFunction
-{dst: 0nx;          } () {} "XMLElementInit"    importFunction
-
-XMLElementDestroyImpl: @XMLElementDestroy;
-XMLElementSetImpl:     @XMLElementSet;
-XMLElementInitImpl:    @XMLElementInit;
-
 XMLValue: [(XMLElement String) Variant];
 
 XMLAttribute: [{
@@ -100,9 +92,9 @@ XMLElementHelper: [{
   ArrayHelper ".padding" def
   ArrayHelper ".padding" def
 
-  INIT:   [               @closure storageAddress XMLElementInitImpl];
-  ASSIGN: [storageAddress @closure storageAddress XMLElementSetImpl];
-  DIE:    [               @closure storageAddress XMLElementDestroyImpl];
+  INIT:   [               @closure storageAddress XMLElementInit];
+  ASSIGN: [storageAddress @closure storageAddress XMLElementSet];
+  DIE:    [               @closure storageAddress XMLElementDestroy];
 }];
 
 ArrayHelper: [{
@@ -843,6 +835,10 @@ xmlInternal: {
   DigitRanges: ((0x0030n32 0x0039n32) (0x0660n32 0x0669n32) (0x06F0n32 0x06F9n32) (0x0966n32 0x096Fn32) (0x09E6n32 0x09EFn32) (0x0A66n32 0x0A6Fn32) (0x0AE6n32 0x0AEFn32) (0x0B66n32 0x0B6Fn32) (0x0BE7n32 0x0BEFn32) (0x0C66n32 0x0C6Fn32) (0x0CE6n32 0x0CEFn32) (0x0D66n32 0x0D6Fn32) (0x0E50n32 0x0E59n32) (0x0ED0n32 0x0ED9n32) (0x0F20n32 0x0F29n32));
   ExtenderRanges: ((0x00B7n32 0x00B7n32) (0x02D0n32 0x02D0n32) (0x02D1n32 0x02D1n32) (0x0387n32 0x0387n32) (0x0640n32 0x0640n32) (0x0E46n32 0x0E46n32) (0x0EC6n32 0x0EC6n32) (0x3005n32 0x3005n32) (0x3031n32 0x3035n32) (0x309Dn32 0x309En32) (0x30FCn32 0x30FEn32));
 };
+
+{dst: 0nx;          } () {} "XMLElementDestroy" importFunction
+{dst: 0nx; src: 0nx;} () {} "XMLElementSet"     importFunction
+{dst: 0nx;          } () {} "XMLElementInit"    importFunction
 
 XMLElementRef: XMLElement Ref virtual;
 
