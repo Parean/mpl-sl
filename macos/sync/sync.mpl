@@ -32,8 +32,9 @@
 "macos.EV_SET"        use
 "macos.NOTE_NSECONDS" use
 "macos.NOTE_USECONDS" use
-"macos.kevent"        use
-"macos.struct_kevent" use
+"macos.kevent"            use
+"macos.struct_kevent"     use
+"runningTime.runningTime" use
 
 "TcpAcceptor.makeTcpAcceptor"     use
 "TcpConnection.makeTcpConnection" use
@@ -72,8 +73,6 @@ connectTcp: [makeTcpConnection];
 # out:
 #   time (Real64) - time elapsed
 getTime: [
-  "runningTime.runningTime" use
-
   runningTime.get
 ];
 
