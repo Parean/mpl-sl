@@ -61,6 +61,10 @@ XMLDocument: [{
 XMLVALUE_ELEMENT:  [0];
 XMLVALUE_CHARDATA: [1];
 
+XMLElementInit:    {dst: 0nx;          } () {} codeRef;
+XMLElementSet:     {dst: 0nx; src: 0nx;} () {} codeRef;
+XMLElementDestroy: {dst: 0nx;          } () {} codeRef;
+
 XMLValue: [(XMLElement String) Variant];
 
 XMLAttribute: [{
@@ -836,17 +840,11 @@ xmlInternal: {
   ExtenderRanges: ((0x00B7n32 0x00B7n32) (0x02D0n32 0x02D0n32) (0x02D1n32 0x02D1n32) (0x0387n32 0x0387n32) (0x0640n32 0x0640n32) (0x0E46n32 0x0E46n32) (0x0EC6n32 0x0EC6n32) (0x3005n32 0x3005n32) (0x3031n32 0x3035n32) (0x309Dn32 0x309En32) (0x30FCn32 0x30FEn32));
 };
 
-{dst: 0nx;          } () {} "XMLElementDestroy" importFunction
-{dst: 0nx; src: 0nx;} () {} "XMLElementSet"     importFunction
-{dst: 0nx;          } () {} "XMLElementInit"    importFunction
+asXMLElement: [XMLElement addressToReference];
 
-XMLElementRef: XMLElement Ref virtual;
-
-asXMLElement: [@XMLElementRef addressToReference];
-
-{dst: 0nx;          } () {} [asXMLElement manuallyInitVariable ]                 "XMLElementInit"    exportFunction
-{dst: 0nx; src: 0nx;} () {} [dst: asXMLElement; src: asXMLElement; src @dst set] "XMLElementSet"     exportFunction
-{dst: 0nx;          } () {} [asXMLElement manuallyDestroyVariable]               "XMLElementDestroy" exportFunction
+[asXMLElement manuallyInitVariable ]                 !XMLElementInit
+[dst: asXMLElement; src: asXMLElement; src @dst set] !XMLElementSet
+[asXMLElement manuallyDestroyVariable]               !XMLElementDestroy
 
 {
   position:   XMLParserPosition Ref;
