@@ -20,16 +20,13 @@
     result: StringView Array Array dynamic; # THE TRANSITION: Do not make object unknown. Regardless of function's input [result] is empty
 
     # Preconditions: arguments have to match ("<separator>", (freeFormText)*)*
-    doUnchecked: [
-      recursive
+    [
       @arguments.next [
         argument:;
         argument "<separator>" = [StringView Array @result.append] [argument @result dynamic.last.append] if
-        doUnchecked
-      ] [drop] if
-    ];
-
-    doUnchecked
+        TRUE
+      ] [drop FALSE] if
+    ] loop
 
     result
   ];
