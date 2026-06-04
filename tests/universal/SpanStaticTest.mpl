@@ -23,11 +23,11 @@ SpanStaticTest: [];
   Object: [{value: 0; CALL: [INVALID];}];
   span:   Object 2 SpanStatic;
   [span.SCHEMA_NAME "SpanStatic<{value: Int32; CALL: «tests/universal/SpanStaticTest.mpl» 23 29 Block;}, 2>" =] "[SpanStatic] produced a wrong [.SCHEMA_NAME]"       ensure
-  [span span "SCHEMA_NAME" fieldIndex fieldIsVirtual                                                               ] "[SpanStatic] produced a non-virtual [.SCHEMA_NAME]" ensure
-  [span.data Object same                                                                                           ] "[SpanStatic] produced a wrong schema"               ensure
-  [@span.data isConst ~                                                                                            ] "[SpanStatic] lost mutability"                       ensure
-  [span.data nil?                                                                                                  ] "[SpanStatic] did not erase reference"               ensure
-  [span.size 2 =                                                                                                   ] "[SpanStatic] produced a wrong size"                 ensure
+  [span span "SCHEMA_NAME" fieldIndex fieldIsVirtual                                                          ] "[SpanStatic] produced a non-virtual [.SCHEMA_NAME]" ensure
+  [span.data Object same                                                                                      ] "[SpanStatic] produced a wrong schema"               ensure
+  [@span.data isConst ~                                                                                       ] "[SpanStatic] lost mutability"                       ensure
+  [span.data nil?                                                                                             ] "[SpanStatic] did not erase reference"               ensure
+  [span.size 2 =                                                                                              ] "[SpanStatic] produced a wrong size"                 ensure
 ] call
 
 [
@@ -164,9 +164,9 @@ SpanStaticTest: [];
   dict:   {a: Object; b: Object; c: Object; d: Object; e: Object;};
   span:   1 3 @dict toSpanStatic.slice;
   [span.SCHEMA_NAME "SpanStatic<{value: Int32; CALL: «tests/universal/SpanStaticTest.mpl» 163 29 Block;}, 3>" =] "[SpanStatic.slice] produced a wrong object"    ensure
-  [@span.data isConst ~                                                                                         ] "[SpanStatic.slice] lost mutability"            ensure
-  [span.data dict.@b is                                                                                         ] "[SpanStatic.slice] produced a wrong reference" ensure
-  [span.size 3 =                                                                                                ] "[SpanStatic.slice] produced a wrong size"      ensure
+  [@span.data isConst ~                                                                                        ] "[SpanStatic.slice] lost mutability"            ensure
+  [span.data dict.@b is                                                                                        ] "[SpanStatic.slice] produced a wrong reference" ensure
+  [span.size 3 =                                                                                               ] "[SpanStatic.slice] produced a wrong size"      ensure
 ] call
 
 [
@@ -174,9 +174,9 @@ SpanStaticTest: [];
   dict:   {a: Object; b: Object;};
   span:   @dict toSpanStatic.span;
   [span.SCHEMA_NAME "Span<{value: Int32; CALL: «tests/universal/SpanStaticTest.mpl» 173 29 Block;}>" =] "[SpanStatic.span] produced a wrong object"    ensure
-  [@span.data isConst ~                                                                                    ] "[SpanStatic.span] lost mutability"            ensure
-  [span.data dict.@a is                                                                                    ] "[SpanStatic.span] produced a wrong reference" ensure
-  [span.size 2 =                                                                                           ] "[SpanStatic.span] produced a wrong size"      ensure
+  [@span.data isConst ~                                                                               ] "[SpanStatic.span] lost mutability"            ensure
+  [span.data dict.@a is                                                                               ] "[SpanStatic.span] produced a wrong reference" ensure
+  [span.size 2 =                                                                                      ] "[SpanStatic.span] produced a wrong size"      ensure
 ] call
 
 [
@@ -184,9 +184,9 @@ SpanStaticTest: [];
   dict:   {a: Object; b: Object;};
   span:   @dict toSpanStatic.spanStatic;
   [span.SCHEMA_NAME "SpanStatic<{value: Int32; CALL: «tests/universal/SpanStaticTest.mpl» 183 29 Block;}, 2>" =] "[SpanStatic.spanStatic] produced a wrong object"    ensure
-  [@span.data isConst ~                                                                                         ] "[SpanStatic.spanStatic] lost mutability"            ensure
-  [span.data dict.@a is                                                                                         ] "[SpanStatic.spanStatic] produced a wrong reference" ensure
-  [span.size 2 =                                                                                                ] "[SpanStatic.spanStatic] produced a wrong size"      ensure
+  [@span.data isConst ~                                                                                        ] "[SpanStatic.spanStatic] lost mutability"            ensure
+  [span.data dict.@a is                                                                                        ] "[SpanStatic.spanStatic] produced a wrong reference" ensure
+  [span.size 2 =                                                                                               ] "[SpanStatic.spanStatic] produced a wrong size"      ensure
 ] call
 
 [
