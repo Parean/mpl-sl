@@ -75,10 +75,11 @@ counter1: Counter;
 
 clear: [
   counter:;
-  0 @counter.!assignCount
-  0 @counter.!callCount
-  0 @counter.!dieCount
-  0 @counter.!initCount
+  # TODO: Remove [dynamic] after updating the compiler.
+  0 dynamic @counter.!assignCount
+  0 dynamic @counter.!callCount
+  0 dynamic @counter.!dieCount
+  0 dynamic @counter.!initCount
 ];
 
 validate: [

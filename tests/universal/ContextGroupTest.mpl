@@ -63,8 +63,9 @@ dieCount:  Int32;
 
 # Test that ContextGroup.spawn moves the input and finished context destroys it
 [
-  0 !initCount
-  0 !dieCount
+  # TODO: Remove [dynamic] after updating the compiler.
+  0 dynamic !initCount
+  0 dynamic !dieCount
   object: {
     INIT: [1 !state initCount 1 + @initCount set];
     DIE: [dieCount 1 + @dieCount set];

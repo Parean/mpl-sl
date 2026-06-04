@@ -36,8 +36,9 @@ dieCount:  Int32;
 
 # Test that spawn moves the input and finished context destroys it
 [
-  0 !initCount
-  0 !dieCount
+  # TODO: Remove [dynamic] after updating the compiler.
+  0 dynamic !initCount
+  0 dynamic !dieCount
   object: {
     INIT: [1 !state initCount 1 + @initCount set];
     DIE: [dieCount 1 + @dieCount set];
@@ -78,7 +79,7 @@ dieCount:  Int32;
   @context.valid? [ # Context is valid, otherwise skip the test
     context manuallyDestroyVariable
     context manuallyInitVariable
-    context.valid? ["Context.INIT did not invalidate context" raiseStaticError] [] uif
+    [context.valid? ~] "Context.INIT did not invalidate context" ensure
   ] when
 ] call
 
@@ -97,8 +98,9 @@ dieCount:  Int32;
 
 # Test that Context.DIE destroys output and reused context destroys it again
 [
-  0 !initCount
-  0 !dieCount
+  # TODO: Remove [dynamic] after updating the compiler.
+  0 dynamic !initCount
+  0 dynamic !dieCount
   Object: [{
     INIT: [initCount 1 + @initCount set];
     DIE: [dieCount 1 + @dieCount set];
@@ -155,18 +157,25 @@ dieCount:  Int32;
 
 # Test that Context.get returns expected values
 [
-  ([] () spawn.get) () same ~ ["Context.get returned invalid output schema" raiseStaticError] [] uif
+  context0: [] () spawn;
+  (@context0.get) () same ~ ["Context.get returned invalid output schema" raiseStaticError] [] uif
 
-  ([0] Int32 spawn.get) (Int32 Ref) same ~ ["Context.get returned invalid output schema" raiseStaticError] [] uif
-  [[0] Int32 spawn.get 0 =] "Context.get returned invalid output value" ensure
+  context1: [0] Int32 spawn;
+  (@context1.get) (Int32 Ref) same ~ ["Context.get returned invalid output schema" raiseStaticError] [] uif
+  context2: [0] Int32 spawn;
+  [@context2.get 0 =] "Context.get returned invalid output value" ensure
 
-  ({CALL: [1];} Int32 spawn.get) (Int32 Ref) same ~ ["Context.get returned invalid output schema" raiseStaticError] [] uif
-  [{CALL: [1];} Int32 spawn.get 1 =] "Context.get returned invalid output value" ensure
+  context3: {CALL: [1];} Int32 spawn;
+  (@context3.get) (Int32 Ref) same ~ ["Context.get returned invalid output schema" raiseStaticError] [] uif
+  context4: {CALL: [1];} Int32 spawn;
+  [@context4.get 1 =] "Context.get returned invalid output value" ensure
 
   code: {} Int32 {} codeRef;
   [2] !code
-  (@code Int32 spawn.get) (Int32 Ref) same ~ ["Context.get returned invalid output schema" raiseStaticError] [] uif
-  [@code Int32 spawn.get 2 =] "Context.get returned invalid output value" ensure
+  context5: @code Int32 spawn;
+  (@context5.get) (Int32 Ref) same ~ ["Context.get returned invalid output schema" raiseStaticError] [] uif
+  context6: @code Int32 spawn;
+  [@context6.get 2 =] "Context.get returned invalid output value" ensure
 ] call
 
 # Test that Context.wait yields
